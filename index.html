@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <style>
+           body {
+               text-align: center;
+           }
+       </style>
+   <title>Quiz3</title>
+</head>
+<body>
+   <h1>Who said this quote?</h1>
+   <div id="quoteContainer"></div>
+
+   <input type="radio" name="author"/><span id="author1">Radio1</span><br/>
+   <input type="radio" name="author"/><span id="author2">Radio2</span><br/>
+   <input type="radio" name="author"/><span id="author3">Radio3</span><br/>
+
+   <button onclick="submit()">Submit</button>
+
+   <!-- 0. Create static HTML elements *
+   1. Obtain all quotes *
+   2. Select three random quotes *
+   3. Show a quote on the screen *
+   4. Show the three authors on screen *
+   5. if the right author is selected, alert "You Won!"
+   6. if incorrect "Wrong choice, the correct answer was AUTHOR" -->
+
+   <script type="text/javascript">
+   fetch('http://api.techlaunch.io/quotes/all.php').then(function(response) {
+		response.json().then(function(data) {
+			// Guarda dentro de una variable the quoteContainer and los elementos con id author
+			var quoteContainer = document.getElementById('quoteContainer');
+			var author1 = document.getElementById('author1');
+			var author2 = document.getElementById('author2');
+			var author3 = document.getElementById('author3');
+
+			// Create three randoms numbers in the range of the lenght of the array
+			var random1 = Math.floor(Math.random() * data.length);
+			var random2 = Math.floor(Math.random() * data.length);
+			var random3 = Math.floor(Math.random() * data.length);
+      // console.log(data); return;
+			// toma el texto del quote con posicion de random1 y lo guarda dentro de una variable  
+			var randomQuote1 = data[random1].text; //arreglo,atribute text
+			
+			//
+			document.getElementById('quoteContainer').textContent = randomQuote1;
+
+			var randomAuthor1 = data[random1].author;
+			document.getElementById('author1').textContent = randomAuthor1;
+			 console.log(data[random1].author);
+
+			var randomAuthor2 = data[random2].author;
+			document.getElementById('author2').textContent = randomAuthor2;
+
+			var randomAuthor3 = data[random3].author;
+			document.getElementById('author3').textContent = randomAuthor3;
+
+
+       });
+   });
+
+   		// function submit() {
+   		// 	if(randomAuthor1 == )
+   		// }
+
+
+
+   </script>
+</body>
+</html>
